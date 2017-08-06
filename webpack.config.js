@@ -5,6 +5,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+
 const extractSass = new ExtractTextPlugin({
   filename: `css/bundle.css`,
   // disable: isDevelopment()
@@ -74,6 +76,19 @@ module.exports = {
       '* @license <%= pkg.license %> \n',
       entryOnly: true
     }),
+    
+    // Start browser sync server with proxy
+    new BrowserSyncPlugin({
+        host: 'localhost',
+        port: 8088,
+        proxy: 'http://localhost:8080/'
+      },
+      {
+        // prevent BrowserSync from reloading the page
+        // and let Webpack Dev Server take care of this
+        reload: false
+      }
+    ),
 
     // Copy source files into distribution folder
     new CopyWebpackPlugin([

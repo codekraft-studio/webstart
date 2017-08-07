@@ -8,13 +8,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
 const extractSass = new ExtractTextPlugin({
-  filename: `css/bundle.css`,
-  // disable: isDevelopment()
+  filename: `css/bundle.css`
 })
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
-
-console.log('current env', NODE_ENV);
 
 const src = path.resolve(__dirname, 'src')
 const dist = path.resolve(__dirname, 'dist')
@@ -40,6 +37,15 @@ module.exports = {
               loader: "css-loader",
               options: {
                 sourceMap: (NODE_ENV === 'development')
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: (NODE_ENV === 'development'),
+                plugins: (loader) => [
+                  require('autoprefixer')()
+                ]
               }
             },
             {

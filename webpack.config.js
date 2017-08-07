@@ -30,7 +30,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.(scss|sass)$/,
         use: extractSass.extract({
           fallback: "style-loader",
           use: [

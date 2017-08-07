@@ -14,8 +14,6 @@ const extractSass = new ExtractTextPlugin({
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-console.log('current env', NODE_ENV);
-
 const src = path.resolve(__dirname, 'src')
 const dist = path.resolve(__dirname, 'dist')
 
@@ -76,7 +74,7 @@ module.exports = {
       '* @license <%= pkg.license %> \n',
       entryOnly: true
     }),
-    
+
     // Start browser sync server with proxy
     new BrowserSyncPlugin({
         host: 'localhost',

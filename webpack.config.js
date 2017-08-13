@@ -8,8 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
 const extractSass = new ExtractTextPlugin({
-  filename: `css/bundle.css`,
-  // disable: isDevelopment()
+  filename: `css/bundle.css`
 })
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -24,6 +23,7 @@ module.exports = {
     path: dist,
     filename: `js/bundle.js`
   },
+  devtool: (NODE_ENV === 'development') ? 'cheap-module-eval-source-map' : 'cheap-module-source-map',
   devServer: {
     contentBase: src
   },
@@ -32,8 +32,8 @@ module.exports = {
       {
         test: /\.(scss|sass)$/,
         use: extractSass.extract({
-          fallback: "style-loader",
           use: [
+            { loader: "style-loader" },
             {
               loader: "css-loader",
               options: {

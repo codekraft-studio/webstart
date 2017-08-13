@@ -6,6 +6,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const extractSass = new ExtractTextPlugin({
   filename: `css/bundle.css`
@@ -38,6 +39,15 @@ module.exports = {
               loader: "css-loader",
               options: {
                 sourceMap: (NODE_ENV === 'development')
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: (NODE_ENV === 'development'),
+                plugins: (loader) => [
+                  require('autoprefixer')()
+                ]
               }
             },
             {
@@ -87,10 +97,19 @@ module.exports = {
         reload: false
       }
     ),
+    
+    // Minify the main html entry
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      minify: {
+        html5: true,
+        removeComments: true,
+        collapseWhitespace: true
+      }
+    }),
 
     // Copy source files into distribution folder
     new CopyWebpackPlugin([
-      { from: './index.html' },
       { from: './robots.txt' },
       { from: './favicon.ico' },
       { from: './img/**/*' }

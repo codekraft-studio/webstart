@@ -33,8 +33,8 @@ module.exports = {
       {
         test: /\.(scss|sass)$/,
         use: extractSass.extract({
+          fallback: "style-loader",
           use: [
-            { loader: "style-loader" },
             {
               loader: "css-loader",
               options: {
@@ -44,6 +44,7 @@ module.exports = {
             {
               loader: 'postcss-loader',
               options: {
+                ident: 'postcss',
                 sourceMap: (NODE_ENV === 'development'),
                 plugins: (loader) => [
                   require('autoprefixer')()

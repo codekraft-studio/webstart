@@ -108,6 +108,9 @@ module.exports = (env = {}) => {
           html5: true,
           removeComments: true,
           collapseWhitespace: true,
+          minifyCSS: true,
+          minifyJS: true,
+          removeEmptyElements: true,
           cache: false
         } : false
       }),

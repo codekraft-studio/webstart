@@ -80,11 +80,12 @@ module.exports = (env = {}) => {
 
       // Add build banner
       new webpack.BannerPlugin({
-        banner:
-        '* Package: <%= pkg.name %> - v<%= pkg.version %> \n' +
-        '* Description: <%= pkg.description %> \n' +
-        '* @author <%= pkg.author %> \n' +
-        '* @license <%= pkg.license %> \n',
+        banner: `
+          Package: ${pkg.name} - v${pkg.version}
+          Description: ${pkg.description}
+          @author ${pkg.author}
+          @license ${pkg.license}
+        `,
         entryOnly: true
       }),
 

@@ -9,7 +9,8 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const extractSass = new ExtractTextPlugin({
-  filename: `css/bundle.css`
+  filename: `css/bundle.css`,
+  disable: process.env.NODE_ENV === "development"
 })
 
 const src = path.resolve(__dirname, 'src')

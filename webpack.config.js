@@ -32,6 +32,16 @@ module.exports = (env = {}) => {
     module: {
       rules: [
         {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015']
+            }
+          }
+        },
+        {
           test: /\.(scss|sass)$/,
           use: extractSass.extract({
             fallback: "style-loader",

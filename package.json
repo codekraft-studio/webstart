@@ -1,6 +1,6 @@
 {
   "name": "webstart",
-  "version": "0.0.1",
+  "version": "0.1.0-beta",
   "description": "A simple webpack based workspace for develop websites.",
   "main": "webpack.config.js",
   "scripts": {

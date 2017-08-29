@@ -1,1 +1,3 @@
-console.log('Script ready.');
+let test = (string = 'ready') => 	`Script ${string}!`
+
+console.log( '%s', test() );

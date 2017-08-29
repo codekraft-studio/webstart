@@ -32,7 +32,18 @@ module.exports = (env = {}) => {
     module: {
       rules: [
         {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015']
+            }
+          }
+        },
+        {
           test: /\.(scss|sass)$/,
+          exclude: /node_modules/,
           use: extractSass.extract({
             fallback: "style-loader",
             use: [
@@ -98,12 +109,13 @@ module.exports = (env = {}) => {
         {
           // prevent BrowserSync from reloading the page
           // and let Webpack Dev Server take care of this
-          reload: true
+          reload: false
         }
       ),
 
       // Minify the main html entry
       new HtmlWebpackPlugin({
+        inject: 'head',
         template: './index.html',
         minify: !env.development ? {
           html5: true,

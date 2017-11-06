@@ -54,8 +54,6 @@ module.exports = (env = {}) => {
 									sourceMap: env.development
 								}
 							}, {
-								loader: 'resolve-url-loader'
-							}, {
 								loader: 'postcss-loader',
 								options: {
 									sourceMap: env.development,
@@ -129,7 +127,7 @@ module.exports = (env = {}) => {
 						collapseWhitespace: true,
 						minifyCSS: true,
 						minifyJS: true,
-						removeEmptyElements: true,
+						// removeEmptyElements: true,
 						cache: false
 					}
 					: false

@@ -12,6 +12,16 @@ In order to start the website development you must run `npm run start` command. 
 
 When runned with the `build` command it will __disable__ the code __source maps__ and __minify all__ the website files (html, js, scss) place them in the `dist` folder which is __production ready__.
 
+## Features
+When you are building your project for the web, usually you want to test it's performances and if is compliant with __Web Fundamentals__ and more. Hopefully Google is very good to deal with it and has produced a node tool called [lighthouse]() which scans for you any website and evaluate it.
+
+This service is integrated in the repository so after you built your project it will automatically run the __perfomances report__.
+When the report process has done you will find the output files containing the results on `output` folder.
+
+You will find both the JSON result and the HTML result.
+
+You can inspect the JSON result using the official [lighthouse viewer](https://googlechrome.github.io/lighthouse/viewer/) provided by Google, simply drag 'n drop the file on the site.
+
 ---
 
 ## Contributing

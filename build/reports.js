@@ -33,16 +33,25 @@ function launchChromeAndRunLighthouse(url, flags = {}, config = null) {
 // Listen
 server.listen(port, () => {
 
+	console.log('Started testing http server.');
+
 	// Start chrome and do reports
 	launchChromeAndRunLighthouse(`http://${hostname}:${port}`, flags).then(results => {
 		// Create the report html
 		const html = new ReportGenerator().generateReportHtml(results);
 		const outputPath = path.join(__dirname, '../output');
+
 		// Ensure output folder exists
 		if(!fs.existsSync(outputPath)) {
 			fs.mkdirSync(outputPath);
 		}
-		fs.writeFileSync(`${outputPath}/index.html`, html);
+
+		console.log('Closing testing http server.');
 		server.close();
+
+		console.log('Writing results to output folder.');
+		// Write both json and generated html
+		fs.writeFileSync(`${outputPath}/report.json`, JSON.stringify(results, null, 2));
+		fs.writeFileSync(`${outputPath}/index.html`, html);
 	});
 });

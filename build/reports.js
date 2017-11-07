@@ -12,7 +12,12 @@ const ReportGenerator = require('lighthouse/lighthouse-core/report/v2/report-gen
 const hostname = 'localhost';
 const port = 10000;
 const flags = {};
-const config = null;
+const config = {
+	extends: 'lighthouse:default',
+	settings: {
+		onlyCategories: ['performance', 'best-practices', 'accessibility']
+	}
+};
 
 // Serve up dist folder
 const serve = serveStatic('dist', {'index': ['index.html']})
@@ -30,13 +35,31 @@ function launchChromeAndRunLighthouse(url, flags = {}, config = null) {
 	});
 }
 
+function emptyDir(dir) {
+	try { var files = fs.readdirSync(dir); }
+	catch(e) {
+		console.log(e);
+		return;
+	}
+	if (files.length > 0) {
+		for (var i = 0; i < files.length; i++) {
+			var filePath = dir + '/' + files[i];
+			if (fs.statSync(filePath).isFile()) {
+				fs.unlinkSync(filePath);
+			} else {
+				rmDir(filePath);
+			}
+		}
+	}
+}
+
 // Listen
 server.listen(port, () => {
 
 	console.log('Started testing http server.');
 
 	// Start chrome and do reports
-	launchChromeAndRunLighthouse(`http://${hostname}:${port}`, flags).then(results => {
+	launchChromeAndRunLighthouse(`http://${hostname}:${port}`, flags, config).then(results => {
 		// Create the report html
 		const html = new ReportGenerator().generateReportHtml(results);
 		const outputPath = path.join(__dirname, '../output');

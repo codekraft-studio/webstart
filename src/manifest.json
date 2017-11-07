@@ -1,0 +1,21 @@
+{
+  "short_name": "Webstart",
+  "name": "Webstart Seed Project",
+  "icons": [{
+    "src": "img/icon.png",
+    "type": "image/png",
+    "sizes": "128x128"
+  }, {
+    "src": "img/icon.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }, {
+    "src": "img/icon.png",
+    "type": "image/png",
+    "sizes": "512x512"
+  }],
+  "start_url": "index.html?launcher=true",
+  "display": "standalone",
+  "theme_color": "#3175c3",
+  "background_color": "#2196F3"
+}

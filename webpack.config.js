@@ -135,12 +135,9 @@ module.exports = (env = {}) => {
 
 			// Copy source files into distribution folder
 			new CopyWebpackPlugin([
-				{
-					from: './**/*'
-				}
-			], {
-				ignore: ['*.js', '*.scss']
-			})
+				{ from: './*' },
+				{ from: './img/**/*' }
+			])
 
 		]
 	}
